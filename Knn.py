@@ -5,7 +5,7 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 import numpy as np
 
-st.header("การจำแนกข้อมูลดอกไม้")
+st.header("Thanathip")
 st.image('./img/my.jpg')
 
 dt = pd.read_csv('./data/iris-3.csv')
