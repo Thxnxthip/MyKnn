@@ -1,13 +1,18 @@
-from sklearn.neighbors import KNeighborsClassifier
 import streamlit as st
 import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import accuracy_score
 import numpy as np
-import matplotlib.pyplot as plt
-import plotly.express as px
-import plotly.graph_objects as go
 
-st.header('kairung')
-#st.image("./img/my.jpg")
+st.header("การจำแนกข้อมูลดอกไม้")
+st.image('./img/NiceMewing.jpg')
+
+dt = pd.read_csv('./data/iris-3.csv')
+st.subheader('ข้อมูลดิบ iris')
+st.write(dt.head(10))
+
+st.subheader('การจำแนกข้อมูลใหม่')
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -30,13 +35,13 @@ html_7 = """
 st.markdown(html_7, unsafe_allow_html=True)
 st.markdown("")
 
-dt = pd.read_csv("./data/iris.csv")
+dt = pd.read_csv("./data/iris-3.csv")
 st.write(dt.head(10))
 
-dt1 = dt['petal.length'].sum()
-dt2 = dt['petal.width'].sum()
-dt3 = dt['sepal.length'].sum()
-dt4 = dt['sepal.width'].sum()
+dt1 = dt['petal_length'].sum()
+dt2 = dt['petal_width'].sum()
+dt3 = dt['sepal_length'].sum()
+dt4 = dt['sepal_width'].sum()
 
 dx = [dt1, dt2, dt3, dt4]
 dx2 = pd.DataFrame(dx, index=["d1", "d2", "d3", "d4"])
@@ -64,7 +69,7 @@ sp_wd = st.number_input("กรุณาเลือกข้อมูล sepal.
 
 if st.button("ทำนายผล"):
     #st.write("ทำนาย")
-   dt = pd.read_csv("./data/iris.csv") 
+   dt = pd.read_csv("./data/iris-3.csv") 
    X = dt.drop('variety', axis=1)
    y = dt.variety   
    Knn_model = KNeighborsClassifier(n_neighbors=3)
@@ -82,4 +87,3 @@ if st.button("ทำนายผล"):
     st.image("./img/iris3.jpg")
 else:
     st.write("ไม่ทำนาย")
-
